@@ -1,0 +1,50 @@
+<%- include('../cabecalho')%>
+
+<main class="pagina-cadastro-produto">
+    <div class="cadastro-produto-container">
+        <h3 class="cadastro-produto-titulo">Editar Encomenda</h3>
+
+        <form method="post">
+            <div class="cadastro-produto-grid">
+                <div class="cadastro-produto-voltar">
+                    <a href="/encomendas">← Voltar</a>
+                </div>
+
+                <div class="cadastro-produto-field">
+                            <label for="cliente">Nome do Cliente</label>
+                            <input value="<%= encomenda.cliente %>" id="cliente" name="cliente" type="text" placeholder="Ex.: João da Silva" required>
+                        </div>
+
+                        <div class="cadastro-produto-field">
+                            <label for="precovenda">Produto</label>
+                            <input value="<%= encomenda.produto %>" id="precovenda" name="produto" type="text" placeholder="Ex.: Blusa de frio" required>
+                        </div>
+
+                        <div class="cadastro-produto-field">
+                            <label for="prazoentrega">Prazo de Entrega</label>
+                            <input value="<%= encomenda.prazoentrega %>" id="prazoentrega" name="prazoentrega" type="text" placeholder="dd/mm/aaaa" required
+                                placeholder="Ex.: 7 dias úteis">
+                        </div>
+
+                        <div class="cadastro-produto-field cadastro-produto-descricao">
+                            <label for="valor">Valor</label>
+                            <input value="<%= encomenda.valor %>" id="valor" name="valor" type="number" step="0.01" placeholder="0,00">
+                        </div>
+                        <div class="cadastro-produto-field cadastro-produto-descricao">
+                            <label for="statuspedido">Status do Pedido</label>
+                            <textarea id="statuspedido" name="statuspedido"
+                                placeholder="Ex.: Em andamento"><%= encomenda.statuspedido %></textarea>
+                        </div>
+            </div>
+
+            <div class="cadastro-produto-acoes">
+            <a href="/encomendas" class="btn-limpar-produto">Cancelar</a>
+            <button type="submit" class="btn-salvar-produto">Salvar alterações</button>
+        </div>
+        </form>
+    </div>
+</main>
+
+</div>
+</body>
+</html>

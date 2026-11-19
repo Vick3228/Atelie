@@ -1,0 +1,59 @@
+<%- include('../cabecalho')%>
+
+<main class="pagina-cadastro-produto">
+
+            <div class="cadastro-produto-container">
+
+                <h3 class="cadastro-produto-titulo">Novo Material</h3>
+
+                <form method="POST" action="/materiais/add">
+
+                    <div class="cadastro-produto-grid">
+
+                        <div class="cadastro-produto-voltar">
+                            <a href="/materiais">← Voltar</a>
+                        </div>
+
+                        <div class="cadastro-produto-field">
+                            <label for="material">Nome do Material</label>
+                            <input id="material" name="material" type="text" placeholder="Ex.: Tecido de algodão" required>
+                        </div>
+
+                        <div class="cadastro-produto-field">
+                            <label for="categoria">Categoria</label>
+                            <input id="categoria" name="categoria" type="text" placeholder="Agulha, fio..." required>
+                        </div>
+
+                        <div class="cadastro-produto-field">
+                            <label for="estoque">Estoque</label>
+                            <input id="estoque" name="estoque" type="text" placeholder="Ex.: 100 unidades" required>
+                        </div>
+
+                        <div class="cadastro-produto-field">
+                            <label for="disponibilidade">Disponibilidade</label>
+                            <input id="disponibilidade" name="disponibilidade" type="text" placeholder="Ex.: Total" required>
+                        </div>
+
+                        <div class="cadastro-produto-field cadastro-produto-descricao">
+                            <label for="situacao">Situação do material</label>
+                            <textarea id="situacao" name="situacao"
+                                placeholder="Ex.: Novo, Antigo..."></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="cadastro-produto-acoes">
+                        <button type="reset" class="btn-limpar-produto">Limpar</button>
+                        <button type="submit" class="btn-salvar-produto">Salvar produto</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </main>
+
+        </body>
+
+        </html>
+    </main>

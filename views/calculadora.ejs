@@ -1,0 +1,165 @@
+
+<%- include('./cabecalho') %>
+
+<main class="main">
+    <div class="topbar">
+        <div class="breadcrumb">
+            Ateliê Digital <span aria-hidden="true">/</span> Calculadora
+        </div>
+        <div class="top-actions">
+            <span class="date-label">✧ Organização que inspira criatividade</span>
+            <a class="button secondary" href="/">⌂ Início</a>
+        </div>
+    </div>
+
+    <header class="page-heading">
+        <div>
+            <div class="eyebrow">Precificação</div>
+            <h1>Calculadora de preço ✿</h1>
+            <p>Descubra quanto cobrar pelas suas peças artesanais.</p>
+        </div>
+    </header>
+
+    <section class="card form-card">
+        <div class="section-head">
+            <h2>Custos do produto</h2>
+            <span class="muted small">Preencha os valores abaixo</span>
+        </div>
+
+        <div class="grid stats">
+            <div class="cadastro-produto-field">
+                <label for="materiais">Custo dos materiais (R$)</label>
+                <input type="number" id="materiais" min="0" step="0.01" placeholder="0,00">
+            </div>
+
+            <div class="cadastro-produto-field">
+                <label for="horas">Horas trabalhadas</label>
+                <input type="number" id="horas" min="0" step="0.5" placeholder="0">
+            </div>
+
+            <div class="cadastro-produto-field">
+                <label for="valor-hora">Valor da hora (R$)</label>
+                <input type="number" id="valor-hora" min="0" step="0.01" placeholder="0,00">
+            </div>
+
+            <div class="cadastro-produto-field">
+                <label for="despesas">Despesas adicionais (R$)</label>
+                <input type="number" id="despesas" min="0" step="0.01" placeholder="0,00">
+            </div>
+
+            <div class="cadastro-produto-field">
+                <label for="lucro">Lucro desejado (%)</label>
+                <input type="number" id="lucro" min="0" step="1" placeholder="30">
+            </div>
+        </div>
+
+        <div class="cadastro-produto-acoes">
+            <button type="button" class="button secondary" id="limpar">
+                Limpar
+            </button>
+            <button type="button" class="button" id="calcular">
+                Calcular preço
+            </button>
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="section-head">
+            <h2>Resultado da precificação</h2>
+        </div>
+
+        <div class="stat-top">
+            <span>Custo dos materiais</span>
+            <strong id="resultado-materiais">R$ 0,00</strong>
+        </div>
+
+        <div class="stat-top">
+            <span>Custo da mão de obra</span>
+            <strong id="resultado-mao-obra">R$ 0,00</strong>
+        </div>
+
+        <div class="stat-top">
+            <span>Despesas adicionais</span>
+            <strong id="resultado-despesas">R$ 0,00</strong>
+        </div>
+
+        <div class="stat-top">
+            <span>Custo total</span>
+            <strong id="resultado-custo">R$ 0,00</strong>
+        </div>
+
+        <div class="stat-top">
+            <span>Lucro estimado</span>
+            <strong id="resultado-lucro">R$ 0,00</strong>
+        </div>
+
+        <div class="note">
+            <span>Preço de venda sugerido</span>
+            <div class="stat-value" id="preco-final">R$ 0,00</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        Ateliê Digital · Precifique com cuidado ✿
+    </footer>
+</main>
+
+</div>
+
+<script>
+    const campos = [
+        'materiais',
+        'horas',
+        'valor-hora',
+        'despesas',
+        'lucro'
+    ];
+
+    function valor(id) {
+        return Math.max(0, Number(document.getElementById(id).value) || 0);
+    }
+
+    function moeda(numero) {
+        return numero.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+    }
+
+    function calcularPreco() {
+        const materiais = valor('materiais');
+        const horas = valor('horas');
+        const valorHora = valor('valor-hora');
+        const despesas = valor('despesas');
+        const percentualLucro = valor('lucro');
+
+        const maoObra = horas * valorHora;
+        const custoTotal = materiais + maoObra + despesas;
+        const lucro = custoTotal * (percentualLucro / 100);
+        const precoFinal = custoTotal + lucro;
+
+        document.getElementById('resultado-materiais').textContent = moeda(materiais);
+        document.getElementById('resultado-mao-obra').textContent = moeda(maoObra);
+        document.getElementById('resultado-despesas').textContent = moeda(despesas);
+        document.getElementById('resultado-custo').textContent = moeda(custoTotal);
+        document.getElementById('resultado-lucro').textContent = moeda(lucro);
+        document.getElementById('preco-final').textContent = moeda(precoFinal);
+    }
+
+    document.getElementById('calcular').addEventListener('click', calcularPreco);
+
+    campos.forEach(id => {
+        document.getElementById(id).addEventListener('input', calcularPreco);
+    });
+
+    document.getElementById('limpar').addEventListener('click', () => {
+        campos.forEach(id => {
+            document.getElementById(id).value = '';
+        });
+
+        calcularPreco();
+    });
+</script>
+
+</body>
+</html>
