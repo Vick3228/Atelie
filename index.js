@@ -7,10 +7,10 @@ import { dirname } from 'path';
 import Produtos from './models/Produtos.js';
 import Encomendas from './models/Encomendas.js';
 import Materiais from './models/Materiais.js';
-import Calculadora from './models/Calculadora.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -120,6 +120,14 @@ app.post('/materiais/upd/:id', async (req, res) => {
 app.get('/calculadora', (req, res) => {
     res.render('calculadora');
 });
+
+app.post('/produto/lst', async (req, res) => {
+  const { pesquisar } = req.body;
+  const produtos = await Produtos.find({
+    nome: new RegExp(pesquisar, 'i')
+  });
+  res.render("produto/lst", { produtos });
+})
 
 // Inicia o servidor
 app.listen(PORT, () => {

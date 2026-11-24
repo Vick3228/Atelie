@@ -1,81 +1,87 @@
 <%- include('../cabecalho')%>
-        <main class="main">
-            <div class="topbar">
-                <div class="breadcrumb">Ateliê Digital <span aria-hidden="true">/</span> Cadastro de Produtos</div>
-                <div class="top-actions">
-                    <span class="date-label">✧ Organização que inspira criatividade</span>
-                    <a class="button secondary" href="/">⌂ Início</a></div>
+    <main class="main">
+        <div class="topbar">
+            <div class="breadcrumb">Ateliê Digital <span aria-hidden="true">/</span> Cadastro de Produtos</div>
+            <div class="top-actions">
+                <span class="date-label">✧ Organização que inspira criatividade</span>
+                <a class="button secondary" href="/">⌂ Início</a>
+            </div>
+        </div>
+
+        <header class="page-heading">
+            <div>
+                <div class="eyebrow">Catálogo do ateliê</div>
+                <a href="/produtos">Cadastro de produtos</a><br><br>
+                <p>Organize suas peças, materiais utilizados e preços de venda.</p>
+                <form class="form-busca" method="post" action="/produto/lst">
+                    <input type="text" name="pesquisar" placeholder="Nome do instrumento">
+                    <input type="submit" value="Buscar">
+                </form>
+
+            </div><a class="button" href="/produtos/add">＋ Cadastrar produto</a>
+        </header>
+        <section>
+            <div class="section-head">
+                <h2>Produtos cadastrados</h2><span class="muted small">
+                    <%= produtos.length %> produto(s) cadastrado(s)
+                </span>
             </div>
 
-            <header class="page-heading">
-                <div>
-                    <div class="eyebrow">Catálogo do ateliê</div>
-                    <a href="/produtos">Cadastro de produtos</a><br><br>
-                    <p>Organize suas peças, materiais utilizados e preços de venda.</p>
-                </div><a class="button" href="/produtos/add">＋ Cadastrar produto</a>
-            </header>
-            <section>
-                <div class="section-head">
-                    <h2>Produtos cadastrados</h2><span class="muted small">
-                        <%= produtos.length %> produto(s) cadastrado(s)
-                    </span>
-                </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td>
+                            <h3>Nome</h3>
+                        </td>
+                        <td>
+                            <h3>Descrição</h3>
+                        </td>
 
-                <div class="card">
-                    <table>
-                        <tr>
-                            <td>
-                                <h3>Nome</h3>
-                            </td>
-                            <td>
-                                <h3>Descrição</h3>
-                            </td>
+                        <td>
+                            <h3>Preço</h3>
+                        </td>
+                        <td>
+                            <h3>Materiais</h3>
+                        </td>
+                        <td>
+                            <h3>Ações</h3>
+                        </td>
+                    </tr>
+                    <% if (produtos.length> 0) { %>
 
-                            <td>
-                                <h3>Preço</h3>
-                            </td>
-                            <td>
-                                <h3>Materiais</h3>
-                            </td>
-                            <td>
-                                <h3>Ações</h3>
-                            </td>
-                        </tr>
-                        <% if (produtos.length> 0) { %>
+                        <% produtos.forEach(produto=> { %>
+                            <tr>
+                                <td>
+                                    <%= produto.nome %>
+                                </td>
+                                <td>
+                                    <%= produto.descricao %>
+                                </td>
+                                <td>R$ <%= produto.precovenda %>
+                                </td>
+                                <td>
+                                    <%= produto.materiais %>
+                                </td>
+                                <td>
+                                    <a href="/produtos/upd/<%=produto.id%>">✏️</a>
+                                    <a href="/produtos/del/<%=produto.id%>">🗑️</a>
+                                </td>
+                            </tr>
+                            <% }) %>
 
-                            <% produtos.forEach(produto=> { %>
-                                <tr>
-                                    <td>
-                                        <%= produto.nome %>
-                                    </td>
-                                    <td>
-                                        <%= produto.descricao %>
-                                    </td>
-                                    <td>R$ <%= produto.precovenda %>
-                                    </td>
-                                    <td>
-                                        <%= produto.materiais %>
-                                    </td>
-                                    <td>
-                                        <a href="/produtos/upd/<%=produto.id%>">✏️</a>
-                                        <a href="/produtos/del/<%=produto.id%>">🗑️</a>
-                                    </td>
-                                </tr>
-                                <% }) %>
+                                <% } else { %>
 
-                                    <% } else { %>
+                                    <tr>
+                                        <td colspan="5">Nenhum produto cadastrado ainda.</td>
+                                    </tr>
 
-                                        <tr>
-                                            <td colspan="5">Nenhum produto cadastrado ainda.</td>
-                                        </tr>
+                                    <% } %>
 
-                                        <% } %>
+                </table>
+            </div>
+        </section>
 
-                    </table>
-                </div>
-            </section>
-
-            <footer class="footer">Ateliê Digital · Protótipo visual estático · Feito com cuidado ✿</footer>
-        </main>
+        <footer class="footer">Ateliê Digital · Protótipo visual estático · Feito com cuidado ✿</footer>
+    </main>
     </div>
     </body>
