@@ -1,88 +1,89 @@
 <%- include('../cabecalho')%>
-        <main class="main">
-            <div class="topbar">
-                <div class="breadcrumb">Ateliê Digital <span aria-hidden="true">/</span> Cadastro de Produtos</div>
-                <div class="top-actions">
-                    <span class="date-label">✧ Organização que inspira criatividade</span>
-                    <a class="button secondary" href="/">⌂ Início</a></div>
+    <main class="main">
+        <div class="topbar">
+            <div class="breadcrumb">Ateliê Digital <span aria-hidden="true">/</span> Cadastro de Produtos</div>
+            <div class="top-actions">
+                <span class="date-label">✧ Organização que inspira criatividade</span>
+                <a class="button secondary" href="/">⌂ Início</a>
+            </div>
+        </div>
+
+        <header class="page-heading">
+            <div>
+                <div class="eyebrow">Catálogo do ateliê</div>
+                <a href="/materiais">Cadastro de materiais</a><br><br>
+                <p>Organize seus materiais, categorias e estoque.</p>
+            </div><a class="button" href="/materiais/add">＋ Cadastrar material</a>
+        </header>
+        <section>
+            <div class="section-head">
+                <h2>Materiais cadastrados</h2><span class="muted small">
+                    <%= materiais.length %> material(is) cadastrado(s)
+                </span>
             </div>
 
-            <header class="page-heading">
-                <div>
-                    <div class="eyebrow">Catálogo do ateliê</div>
-                    <a href="/materiais">Cadastro de materiais</a><br><br>
-                    <p>Organize seus materiais, categorias e estoque.</p>
-                </div><a class="button" href="/materiais/add">＋ Cadastrar material</a>
-            </header>
-            <section>
-                <div class="section-head">
-                    <h2>Materiais cadastrados</h2><span class="muted small">
-                        <%= materiais.length %> material(is) cadastrado(s)
-                    </span>
-                </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td>
+                            <h3>Material</h3>
+                        </td>
+                        <td>
+                            <h3>Categoria</h3>
+                        </td>
 
-                <div class="card">
-                    <table>
-                        <tr>
-                            <td>
-                                <h3>Material</h3>
-                            </td>
-                            <td>
-                                <h3>Categoria</h3>
-                            </td>
+                        <td>
+                            <h3>Estoque</h3>
+                        </td>
+                        <td>
+                            <h3>Disponibilidade</h3>
+                        </td>
+                        <td>
+                            <h3>Situação</h3>
+                        </td>
+                        <td>
+                            <h3>Ações</h3>
+                        </td>
+                    </tr>
+                    <% if (materiais.length> 0) { %>
 
-                            <td>
-                                <h3>Estoque</h3>
-                            </td>
-                            <td>
-                                <h3>Disponibilidade</h3>
-                            </td>
-                            <td>
-                                <h3>Situação</h3>
-                            </td>
-                            <td>
-                                <h3>Ações</h3>
-                            </td>
-                        </tr>
-                        <% if (materiais.length > 0) { %>
+                        <% materiais.forEach(material=> { %>
+                            <tr>
+                                <td>
+                                    <%= material.material %>
+                                </td>
+                                <td>
+                                    <%= material.categoria %>
+                                </td>
+                                <td>
+                                    <%= material.estoque %>
+                                </td>
+                                <td>
+                                    <%= material.disponibilidade %>
+                                </td>
+                                <td>
+                                    <%= material.situacao %>
+                                </td>
+                                <td>
+                                    <a href="/materiais/upd/<%=material.id%>">✏️</a>
+                                    <a href="/materiais/del/<%=material.id%>">🗑️</a>
+                                </td>
+                            </tr>
+                            <% }) %>
 
-                            <% materiais.forEach(material=> { %>
-                                <tr>
-                                    <td>
-                                        <%= material.material %>
-                                    </td>
-                                    <td>
-                                        <%= material.categoria %>
-                                    </td>
-                                    <td>
-                                        <%= material.estoque %>
-                                    </td>
-                                    <td>
-                                        <%= material.disponibilidade %>
-                                    </td>
-                                    <td>
-                                        <%= material.situacao %>
-                                    </td>
-                                    <td>
-                                        <a href="/materiais/upd/<%=material.id%>">✏️</a>
-                                        <a href="/materiais/del/<%=material.id%>">🗑️</a>
-                                    </td>
-                                </tr>
-                                <% }) %>
+                                <% } else { %>
 
-                                    <% } else { %>
+                                    <tr>
+                                        <td colspan="5">Nenhum material cadastrado ainda.</td>
+                                    </tr>
 
-                                        <tr>
-                                            <td colspan="5">Nenhum produto cadastrado ainda.</td>
-                                        </tr>
+                                    <% } %>
 
-                                        <% } %>
+                </table>
+            </div>
+        </section>
 
-                    </table>
-                </div>
-            </section>
-
-            <footer class="footer">Ateliê Digital · Protótipo visual estático · Feito com cuidado ✿</footer>
-        </main>
+        <footer class="footer">Ateliê Digital · Protótipo visual estático · Feito com cuidado ✿</footer>
+    </main>
     </div>
     </body>

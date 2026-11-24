@@ -1,87 +1,88 @@
 <%- include('../cabecalho')%>
-        <main class="main">
-            <div class="topbar">
-                <div class="breadcrumb">Ateliê Digital <span aria-hidden="true">/</span> Cadastro de Produtos</div>
-                <div class="top-actions">
-                    <span class="date-label">✧ Organização que inspira criatividade</span>
-                    <a class="button secondary" href="/">⌂ Início</a></div>
+    <main class="main">
+        <div class="topbar">
+            <div class="breadcrumb">Ateliê Digital <span aria-hidden="true">/</span> Cadastro de Produtos</div>
+            <div class="top-actions">
+                <span class="date-label">✧ Organização que inspira criatividade</span>
+                <a class="button secondary" href="/">⌂ Início</a>
+            </div>
+        </div>
+
+        <header class="page-heading">
+            <div>
+                <div class="eyebrow">Catálogo do ateliê</div>
+                <a href="/encomendas">Cadastro de encomendas</a><br><br>
+                <p>Organize suas encomendas, clientes e prazos de entrega.</p>
+            </div><a class="button" href="/encomendas/add">＋ Cadastrar encomenda</a>
+        </header>
+        <section>
+            <div class="section-head">
+                <h2>Encomendas cadastradas</h2><span class="muted small">
+                    <%= encomendas.length %> encomenda(s) cadastrada(s)
+                </span>
             </div>
 
-            <header class="page-heading">
-                <div>
-                    <div class="eyebrow">Catálogo do ateliê</div>
-                    <a href="/encomendas">Cadastro de encomendas</a><br><br>
-                    <p>Organize suas encomendas, clientes e prazos de entrega.</p>
-                </div><a class="button" href="/encomendas/add">＋ Cadastrar encomenda</a>
-            </header>
-            <section>
-                <div class="section-head">
-                    <h2>Encomendas cadastradas</h2><span class="muted small">
-                        <%= encomendas.length %> encomenda(s) cadastrada(s)
-                    </span>
-                </div>
+            <div class="card">
+                <table>
+                    <tr>
+                        <td>
+                            <h3>Cliente</h3>
+                        </td>
+                        <td>
+                            <h3>Produto</h3>
+                        </td>
 
-                <div class="card">
-                    <table>
-                        <tr>
-                            <td>
-                                <h3>Cliente</h3>
-                            </td>
-                            <td>
-                                <h3>Produto</h3>
-                            </td>
+                        <td>
+                            <h3>Prazo de Entrega</h3>
+                        </td>
+                        <td>
+                            <h3>Valor</h3>
+                        </td>
+                        <td>
+                            <h3>Status do Pedido</h3>
+                        </td>
+                        <td>
+                            <h3>Ações</h3>
+                        </td>
+                    </tr>
+                    <% if (encomendas.length> 0) { %>
 
-                            <td>
-                                <h3>Prazo de Entrega</h3>
-                            </td>
-                            <td>
-                                <h3>Valor</h3>
-                            </td>
-                            <td>
-                                <h3>Status do Pedido</h3>
-                            </td>
-                            <td>
-                                <h3>Ações</h3>
-                            </td>
-                        </tr>
-                        <% if (encomendas.length > 0) { %>
+                        <% encomendas.forEach(encomenda=> { %>
+                            <tr>
+                                <td>
+                                    <%= encomenda.cliente %>
+                                </td>
+                                <td>
+                                    <%= encomenda.produto %>
+                                </td>
+                                <td>
+                                    <%= encomenda.prazoentrega %>
+                                </td>
+                                <td>R$ <%= encomenda.valor %>
+                                </td>
+                                <td>
+                                    <%= encomenda.statuspedido %>
+                                </td>
+                                <td>
+                                    <a href="/encomendas/upd/<%=encomenda.id%>">✏️</a>
+                                    <a href="/encomendas/del/<%=encomenda.id%>">🗑️</a>
+                                </td>
+                            </tr>
+                            <% }) %>
 
-                            <% encomendas.forEach(encomenda=> { %>
-                                <tr>
-                                    <td>
-                                        <%= encomenda.cliente %>
-                                    </td>
-                                    <td>
-                                        <%= encomenda.produto %>
-                                    </td>
-                                    <td>
-                                        <%= encomenda.prazoentrega %>
-                                    </td>
-                                    <td>R$ <%= encomenda.valor %>
-                                    </td>
-                                    <td>
-                                        <%= encomenda.statuspedido %>
-                                    </td>
-                                    <td>
-                                        <a href="/encomendas/upd/<%=encomenda.id%>">✏️</a>
-                                        <a href="/encomendas/del/<%=encomenda.id%>">🗑️</a>
-                                    </td>
-                                </tr>
-                                <% }) %>
+                                <% } else { %>
 
-                                    <% } else { %>
+                                    <tr>
+                                        <td colspan="5">Nenhuma encomenda cadastrada ainda.</td>
+                                    </tr>
 
-                                        <tr>
-                                            <td colspan="5">Nenhum produto cadastrado ainda.</td>
-                                        </tr>
+                                    <% } %>
 
-                                        <% } %>
+                </table>
+            </div>
+        </section>
 
-                    </table>
-                </div>
-            </section>
-
-            <footer class="footer">Ateliê Digital · Protótipo visual estático · Feito com cuidado ✿</footer>
-        </main>
+        <footer class="footer">Ateliê Digital · Protótipo visual estático · Feito com cuidado ✿</footer>
+    </main>
     </div>
     </body>
