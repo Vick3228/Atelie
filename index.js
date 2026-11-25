@@ -129,6 +129,22 @@ app.post('/produto/lst', async (req, res) => {
   res.render("produto/lst", { produtos });
 })
 
+app.post('/encomendas/lst', async (req, res) => {
+  const { pesquisar } = req.body;
+  const encomendas = await Encomendas.find({
+    cliente: new RegExp(pesquisar, 'i')
+  });
+  res.render("encomenda/lst", { encomendas });
+});
+
+app.post('/materiais/lst', async (req, res) => {
+  const { pesquisar } = req.body;
+  const materiais = await Materiais.find({
+    material: new RegExp(pesquisar, 'i')
+  });
+  res.render("materiais/lst", { materiais });
+});
+
 // Inicia o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
