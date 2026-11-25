@@ -17,22 +17,27 @@
     <section class="grid stats" aria-label="Indicadores do ateliê">
       <article class="card">
         <div class="stat-top">Encomendas pendentes <span class="stat-icon">▤</span></div>
-        <div class="stat-value">—</div>
-        <div class="stat-note">Aguardando dados</div>
+        <div class="stat-value">
+          <%= qtdEncomendas %>
+        </div>
       </article>
       <article class="card">
-        <div class="stat-top">Custos do mês <span class="stat-icon">◉</span></div>
-        <div class="stat-value">—</div>
-        <div class="stat-note">Aguardando dados</div>
+        <div class="stat-top">Materiais cadastrados <span class="stat-icon">◉</span></div>
+        <div class="stat-value">
+          <%= qtdMateriais %>
+        </div>
       </article>
       <article class="card">
-        <div class="stat-top">Vendas do mês <span class="stat-icon">♡</span></div>
-        <div class="stat-value">—</div>
-        <div class="stat-note">Aguardando dados</div>
+        <div class="stat-top">Produtos cadastrados <span class="stat-icon">♡</span></div>
+        <div class="stat-value">
+          <%= qtdProdutos %>
+        </div>
       </article>
       <article class="card">
-        <div class="stat-top">Lucro mensal <span class="stat-icon">✧</span></div>
-        <div class="stat-value">—</div>
+        <div class="stat-top">Resumo de lucro <span class="stat-icon">✧</span></div>
+        <div class="stat-value">
+          R$ <%= totalEncomendas.toFixed(2) %>
+        </div>
         <div class="stat-note">Aguardando dados</div>
       </article>
     </section>
@@ -53,7 +58,7 @@
       </article>
     </section>
 
-    <footer class="footer">Ateliê Digital · Protótipo visual estático · Feito com cuidado ✿</footer>
+    <footer class="footer">Feito por: Vitória Navarro ✿</footer>
   </main>
   </div>
   </body>

@@ -23,8 +23,29 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Rota principal
-app.get('/', (req, res) => {
-    res.render('index');
+app.get('/', async (req, res) => {
+  const qtdProdutos = await Produtos.countDocuments();
+  const qtdEncomendas = await Encomendas.countDocuments();
+  const qtdMateriais = await Materiais.countDocuments();
+
+  // Soma o campo 'valor' de todas as encomendas
+  const resultadoSoma = await Encomendas.aggregate([
+    {
+      $group: {
+        _id: null,
+        totalGeral: { $sum: '$valor' }
+      }
+    }
+  ]);
+
+  const totalEncomendas = resultadoSoma.length > 0 ? resultadoSoma[0].totalGeral : 0;
+
+  res.render('index', { 
+    qtdProdutos, 
+    qtdEncomendas, 
+    qtdMateriais, 
+    totalEncomendas 
+  });
 });
 
 //produtos
